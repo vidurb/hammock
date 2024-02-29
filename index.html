@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
+        <title>Lit Map</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
+
+        <link href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet">
+        <script src="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js"></script>
+        <script src="https://raw.githubusercontent.com/Airtable/airtable.js/master/build/airtable.browser.js"></script>
+
+    </head>
+    <body>
+        <div id="map"></div>
+
+        <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
+        
+
+    
+
+        <header>
+            <div class="header-links">
+                <img class="logo" src="hammock-white.svg">
+                <div class="header-link">Geo</div>
+                <div class="header-link">Time</div>
+                <div class="header-link">Gender</div>
+                <div class="header-link">Tags</div>
+                <div class="header-link">Awards</div>
+            </div>
+            <div class="header-controls">
+                <input type="text" id="search-bar" placeholder="Search for your favourite author"></input>
+                <button class="button-primary" id="btnRandom"><img src="icons/shuffle.svg"></button>
+            </div>
+        </header>
+
+<div id="sidebar" class="sidebar">
+   <div id="sidebar-title" class="sidebar-title">
+    Result
+    <button onclick="toggleSidebar()" class="button-primary"><img width="16px" src="icons/chevron-up.svg"></button>
+</div>
+
+    <div id="sidebar-body" class="sidebar-body">
+
+
+
+    </div>
+
+   
+
+</div>
+
+
+<script>
+
+    var sidebar = document.getElementById('sidebar-body');
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiZ3lhbmwiLCJhIjoiY2swNmNoY29kMDA2ZzNjbWN4MmRvbHlmYiJ9.HJHfadzLE1cNqce2G51BEQ';
+
+const map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/gyanl/cls90czva01au01pld9fc7b5x',
+  center: [69.2075, 34.5553], // Example coordinates, you might want to center the map differently
+  zoom: 3
+});
+
+map.on('load', function() {
+  // Add a new source from our GeoJSON data and set the 'cluster' option to true.
+  map.addSource('authors', {
+    type: 'geojson',
+    // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
+    // 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
+    data: 'data.geojson', // Replace this with the path to your GeoJSON file
+    cluster: true,
+    clusterMaxZoom: 14, // Max zoom to cluster points on
+    clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
+  });
+
+  // Use Mapbox GL JS's 'addLayer' function to add the points to the map.
+  map.addLayer({
+    id: 'clusters',
+    type: 'circle',
+    source: 'authors',
+    filter: ['has', 'point_count'],
+    paint: {
+      'circle-color': [
+        'step',
+        ['get', 'point_count'],
+        '#67FAAF',
+        100,
+        '#f1f075',
+        750,
+        '#f28cb1'
+      ],
+      'circle-radius': [
+        'step',
+        ['get', 'point_count'],
+        20,
+        100,
+        30,
+        750,
+        40
+      ]
+    }
+  });
+
+  map.addLayer({
+    id: 'cluster-count',
+    type: 'symbol',
+    source: 'authors',
+    filter: ['has', 'point_count'],
+    layout: {
+      'text-field': '{point_count_abbreviated}',
+      'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+      'text-size': 12
+    }
+  });
+
+  map.addLayer({
+    id: 'unclustered-point',
+    type: 'circle',
+    source: 'authors',
+    filter: ['!', ['has', 'point_count']],
+    paint: {
+      'circle-color': '#11b4da',
+      'circle-radius': 4,
+      'circle-stroke-width': 1,
+      'circle-stroke-color': '#fff'
+    }
+  });
+
+  // When a click event occurs on a feature in the 'unclustered-point' layer, open a popup at the location of the feature, with description HTML from its properties.
+  map.on('click', 'unclustered-point', function(e) {
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.author_name;
+
+    // Ensure that if the map is zoomed out such that multiple copies of the feature are visible, the popup appears over the copy being pointed to.
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+
+    new mapboxgl.Popup()
+      .setLngLat(coordinates)
+      .setHTML(description)
+      .addTo(map);
+  });
+
+  // Add zoom and rotation controls to the map.
+  map.addControl(new mapboxgl.NavigationControl());
+});
+
+
+
+    </script>
+
+    </body>
+    </html>
+
+</body>
+</html>
