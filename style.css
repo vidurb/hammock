@@ -130,7 +130,13 @@ line-height: 1.4;
     border-top: 1px solid var(--color-foreground-2);
     display: flex;
     justify-content: space-between;
-    align-items: center;
+}
+
+.sidebar-author{
+    padding: 12px 10px;
+    border-top: 1px solid var(--color-foreground-2);
+    display: block;
+    flex-direction: column;
 }
 
 input[type="text"] {

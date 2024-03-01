@@ -59,8 +59,17 @@
 
 
 <script>
-
+    var title = document.getElementById('sidebar-title');
     var sidebar = document.getElementById('sidebar-body');
+
+function setSidebarTitle(input) {
+  title.innerHTML = input;
+}
+    
+
+function addAuthorResult(name, birth, work1) {
+  sidebar.innerHTML += '<div class="sidebar-author"><h3>' + name + '</h3><p> Born in ' + birth + '. Known for writing '+ work1 +'</p></div>';
+}
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3lhbmwiLCJhIjoiY2swNmNoY29kMDA2ZzNjbWN4MmRvbHlmYiJ9.HJHfadzLE1cNqce2G51BEQ';
 
@@ -121,7 +130,6 @@ map.on('load', function() {
       'text-field': '{point_count_abbreviated}',
       'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
       'text-size': 16,
-      'text-color': '#333333'
     }
   });
 
@@ -142,6 +150,9 @@ map.on('load', function() {
     var coordinates = e.features[0].geometry.coordinates.slice();
     var description = e.features[0].properties.author_name;
 
+    setSidebarTitle("1 result");
+    addAuthorResult(e.features[0].properties.author_name, e.features[0].properties.year_birth, e.features[0].properties.work_1);
+
     // Ensure that if the map is zoomed out such that multiple copies of the feature are visible, the popup appears over the copy being pointed to.
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -156,8 +167,6 @@ map.on('load', function() {
   // Add zoom and rotation controls to the map.
 //   map.addControl(new mapboxgl.NavigationControl());
 });
-
-
 
     </script>
 
