@@ -17,13 +17,6 @@
 
     </head>
     <body>
-        <div id="map"></div>
-
-        <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
-        
-
-    
-
         <header>
             <div class="header-links">
                 <img class="logo" src="hammock-white.svg">
@@ -39,23 +32,20 @@
             </div>
         </header>
 
-<h1>Discover your favourite author's best work</h1>
+        <div id="map"></div>
+        <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
 
-<div id="sidebar" class="sidebar">
-   <div id="sidebar-title" class="sidebar-title">
-    Result
-    <button onclick="toggleSidebar()" class="button-primary"><img width="16px" src="icons/chevron-up.svg"></button>
-</div>
+        <div id="sidebar" class="sidebar">
+            
+            <div id="sidebar-title" class="sidebar-title">
+                Result
+                <button onclick="toggleSidebar()" class="button-primary"><img width="16px" src="icons/chevron-up.svg"></button>
+            </div>
 
-    <div id="sidebar-body" class="sidebar-body">
+            <div id="sidebar-body" class="sidebar-body">
+            </div>
 
-
-
-    </div>
-
-   
-
-</div>
+        </div>
 
 
 <script>
@@ -65,10 +55,13 @@
 function setSidebarTitle(input) {
   title.innerHTML = input;
 }
-    
 
-function addAuthorResult(name, birth, work1) {
-  sidebar.innerHTML += '<div class="sidebar-author"><h3>' + name + '</h3><p> Born in ' + birth + '. Known for writing '+ work1 +'</p></div>';
+function clearSidebar(){
+  sidebar.innerHTML = "";
+}
+
+function addAuthorResult(name, city_birth, work1) {
+  sidebar.innerHTML += '<div class="sidebar-author"><h3>' + name + '</br><span class="color-mid-green">' + city_birth + '</span></h3><p class="text-label padtop">Author of</p><p>'+ work1 +'</p><p>Book 2</p></div>';
 }
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3lhbmwiLCJhIjoiY2swNmNoY29kMDA2ZzNjbWN4MmRvbHlmYiJ9.HJHfadzLE1cNqce2G51BEQ';
@@ -151,21 +144,34 @@ map.on('load', function() {
     var description = e.features[0].properties.author_name;
 
     setSidebarTitle("1 result");
-    addAuthorResult(e.features[0].properties.author_name, e.features[0].properties.year_birth, e.features[0].properties.work_1);
+    addAuthorResult(e.features[0].properties.author_name, e.features[0].properties.city_birth, e.features[0].properties.work_1);
 
     // Ensure that if the map is zoomed out such that multiple copies of the feature are visible, the popup appears over the copy being pointed to.
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
-
-    new mapboxgl.Popup()
-      .setLngLat(coordinates)
-      .setHTML(description)
-      .addTo(map);
   });
 
-  // Add zoom and rotation controls to the map.
-//   map.addControl(new mapboxgl.NavigationControl());
+  // Clicking on a cluster displays all points in cluster in sidebar
+  map.on('click', 'clusters', function(e) {
+  var features = map.queryRenderedFeatures(e.point, {
+    layers: ['clusters']
+  });
+  var clusterId = features[0].properties.cluster_id;
+  map.getSource('authors').getClusterLeaves(clusterId, 10, 0, function(err, leaves) {
+    if (err) {
+      return console.error('Error getting leaves of cluster: ', err);
+    }
+    clearSidebar();
+    setSidebarTitle(leaves.length + " results");
+    leaves.forEach(function(leaf) {
+      addAuthorResult(leaf.properties.author_name, leaf.properties.city_birth, leaf.properties.work_1);
+    });
+  });
+});
+
+    // Add zoom and rotation controls to the map.
+    // map.addControl(new mapboxgl.NavigationControl());
 });
 
     </script>
