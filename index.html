@@ -32,8 +32,7 @@
       <div class="header-link">Awards</div>
     </div>
     <div class="header-controls">
-      <input type="text" id="search-bar" placeholder="Search for your favourite author"
-        oninput="searchAuthors()"></input>
+      <input type="text" id="search-bar" placeholder="Search for your favourite author"></input>
       <button class="button-primary" id="btnRandom"><img src="icons/shuffle.svg"></button>
     </div>
   </header>
@@ -82,12 +81,12 @@
 
 
     // Appends author result to sidebar
-    function addAuthorResult(name, city_birth, city_residence, country, year_birth, year_death, work1, work2) {
+    function addAuthorResult(name, city_birth, city_residence, country, year_birth, year_death, work1, work2, lat, long) {
 
       showSidebar();
 
       var authorDetails = `
-          <div onclick="setAuthorDetails('${name}', '${city_birth}', '${city_residence}', '${country}', ${year_birth}, ${year_death}, '${work1}', '${work2}')" class="sidebar-author">
+            <div onclick="setAuthorDetails('${name}', '${city_birth}', '${city_residence}', '${country}', ${year_birth}, ${year_death}, '${work1}', '${work2}', ${lat}, ${long})" class="sidebar-author">
             <h3>${name}<br><span class="color-mid-green">${city_birth}</span></h3>
             <p class="text-label padtop">Author of</p>
             <p>${work1}</p>
@@ -96,23 +95,8 @@
       sidebar.innerHTML += authorDetails;
     }
 
-    // Sets author result to sidebar
-    function setAuthorResult(name, city_birth, city_residence, country, year_birth, year_death, work1, work2) {
-
-      showSidebar();
-
-      var authorDetails = `
-          <div onclick="setAuthorDetails('${name}', '${city_birth}', '${city_residence}', '${country}', ${year_birth}, ${year_death}, '${work1}', '${work2}')" class="sidebar-author">
-            <h3>${name}<br><span class="color-mid-green">${city_birth}</span></h3>
-            <p class="text-label padtop">Author of</p>
-            <p>${work1}</p>
-            <p>${work2}</p>
-          </div>`;
-      sidebar.innerHTML = authorDetails;
-    }
-
     //shows full author details in sidebar
-    function setAuthorDetails(name, city_birth, city_residence, country, year_birth, year_death, work1, work2) {
+    function setAuthorDetails(name, city_birth, city_residence, country, year_birth, year_death, work1, work2, lat, long) {
 
       showAuthorDetails();
 
@@ -140,6 +124,7 @@
             <p class="text-label padtop">Bio</p>
             <p class="bio">Author of the famous book ${work1} and ${work2}. Born in ${city_birth} in ${year_birth}${year_death ? ` and died in ${year_death}` : " and is still alive and kicking"}.</p>
               `;
+      flyTo(long, lat, 7);
     }
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiZ3lhbmwiLCJhIjoiY2swNmNoY29kMDA2ZzNjbWN4MmRvbHlmYiJ9.HJHfadzLE1cNqce2G51BEQ';
@@ -150,6 +135,15 @@
       center: [78.0000, 28.0000], // Example coordinates, you might want to center the map differently
       zoom: 3
     });
+
+    // Fly to a specific location on the map
+    function flyTo(latitude, longitude, zoom) {
+      map.flyTo({
+        center: [longitude, latitude],
+        zoom: zoom
+      });
+    }
+
 
     map.on('load', function () {
       // Add a new source from our GeoJSON data and set the 'cluster' option to true.
@@ -224,15 +218,18 @@
         var description = e.features[0].properties.author_name;
 
         setSidebarTitle("1 result");
-        setAuthorResult(
-          e.features[0].properties.name,
+        clearSidebar();
+        addAuthorResult(
+          e.features[0].properties.author_name,
           e.features[0].properties.city_birth,
           e.features[0].properties.city_residence,
           e.features[0].properties.country,
           e.features[0].properties.year_birth,
           e.features[0].properties.year_death,
           e.features[0].properties.work_1,
-          e.features[0].properties.work_2
+          e.features[0].properties.work_2,
+          coordinates[0],
+          coordinates[1]
         );
 
         // Ensure that if the map is zoomed out such that multiple copies of the feature are visible, the popup appears over the copy being pointed to.
@@ -262,38 +259,47 @@
               leaf.properties.year_birth,
               leaf.properties.year_death,
               leaf.properties.work_1,
-              leaf.properties.work_2
+              leaf.properties.work_2,
+              leaf.geometry.coordinates[0],
+              leaf.geometry.coordinates[1]
             );
           });
         });
       });
 
-        function searchAuthors() {
-          const searchValue = document.getElementById('search-bar').value.toLowerCase();
-          const features = map.querySourceFeatures('authors');
-          const filteredFeatures = features.filter(feature => {
-            const authorName = feature.properties.author_name.toLowerCase();
-            return authorName.includes(searchValue);
-          });
 
-          // Clear the sidebar
-          clearSidebar();
+      function searchAuthors() {
+        const searchValue = document.getElementById('search-bar').value.toLowerCase();
+        const searchRegex = new RegExp(searchValue.replace(/[^a-zA-Z0-9]/g, ''), 'i'); // Create a case-insensitive regex, ignoring non-alphanumeric characters
+        const features = map.querySourceFeatures('authors');
+        const filteredFeatures = features.filter(feature => {
+          const authorName = feature.properties.author_name;
+          return authorName && typeof authorName === 'string' && searchRegex.test(authorName.replace(/[^a-zA-Z0-9]/g, ''));
+        });
 
-          // Update the sidebar with the search results
-          setSidebarTitle(filteredFeatures.length + " results");
-          filteredFeatures.forEach(feature => {
-            addAuthorResult(
-              feature.properties.author_name,
-              feature.properties.city_birth,
-              feature.properties.city_residence,
-              feature.properties.country,
-              feature.properties.year_birth,
-              feature.properties.year_death,
-              feature.properties.work_1,
-              feature.properties.work_2
-            );
-          });
-        }
+        // Clear the sidebar
+        clearSidebar();
+
+        // Update the sidebar with the search results
+        setSidebarTitle(filteredFeatures.length + " results");
+        filteredFeatures.forEach(feature => {
+          addAuthorResult(
+            feature.properties.author_name,
+            feature.properties.city_birth,
+            feature.properties.city_residence,
+            feature.properties.country,
+            feature.properties.year_birth,
+            feature.properties.year_death,
+            feature.properties.work_1,
+            feature.properties.work_2,
+            feature.geometry.coordinates[0],
+            feature.geometry.coordinates[1]
+          );
+        });
+      }
+
+      document.getElementById('search-bar').addEventListener('input', searchAuthors);
+
 
       // Add zoom and rotation controls to the map.
       // map.addControl(new mapboxgl.NavigationControl());
