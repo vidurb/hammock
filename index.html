@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
-        <script src="script.js"></script>
         <title>Lit Map</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,29 +16,29 @@
 
     </head>
     <body>
-        <header>
-            <div class="header-links">
-                <img class="logo" src="hammock-white.svg">
-                <div class="header-link">Geo</div>
-                <div class="header-link">Time</div>
-                <div class="header-link">Gender</div>
-                <div class="header-link">Tags</div>
-                <div class="header-link">Awards</div>
-            </div>
-            <div class="header-controls">
-                <input type="text" id="search-bar" placeholder="Search for your favourite author"></input>
-                <button class="button-primary" id="btnRandom"><img src="icons/shuffle.svg"></button>
-            </div>
-        </header>
-
         <div id="map"></div>
         <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
 
-        <div id="sidebar" class="sidebar">
+        <header class="glass">
+          <div class="header-links">
+              <img class="logo" src="hammock-white.svg">
+              <div class="header-link">Geo</div>
+              <div class="header-link">Time</div>
+              <div class="header-link">Gender</div>
+              <div class="header-link">Tags</div>
+              <div class="header-link">Awards</div>
+          </div>
+          <div class="header-controls">
+              <input type="text" id="search-bar" placeholder="Search for your favourite author"></input>
+              <button class="button-primary" id="btnRandom"><img src="icons/shuffle.svg"></button>
+          </div>
+      </header>
+
+        <div id="sidebar" class="sidebar glass">
             
-            <div id="sidebar-title" class="sidebar-title">
-                Result
-                <button onclick="toggleSidebar()" class="button-primary"><img width="16px" src="icons/chevron-up.svg"></button>
+            <div class="sidebar-title">
+                <span id="sidebar-title">Result</span>
+                <button onclick="toggleSidebar()" class="button-primary"><img id="chevron" width="16px" src="icons/chevron-up.svg"></button>
             </div>
 
             <div id="sidebar-body" class="sidebar-body">
@@ -51,6 +50,12 @@
 <script>
     var title = document.getElementById('sidebar-title');
     var sidebar = document.getElementById('sidebar-body');
+    var titlechevron = document.getElementById('chevron');
+
+function toggleSidebar() {
+  sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
+  titlechevron.style.rotate = titlechevron.style.rotate === '180deg' ? '0deg' : '180deg';
+}
 
 function setSidebarTitle(input) {
   title.innerHTML = input;
@@ -62,6 +67,11 @@ function clearSidebar(){
 
 function addAuthorResult(name, city_birth, work1) {
   sidebar.innerHTML += '<div class="sidebar-author"><h3>' + name + '</br><span class="color-mid-green">' + city_birth + '</span></h3><p class="text-label padtop">Author of</p><p>'+ work1 +'</p><p>Book 2</p></div>';
+}
+
+function setAuthorResult(name, city_birth, work1) {
+  sidebar.innerHTML = '<div class="sidebar-author"><h3>' + name + '</br><span class="color-mid-green">' + city_birth + '</span></h3><p class="text-label padtop">Author of</p><p>'+ work1 +'</p><p>Book 2</p></div>';
+
 }
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3lhbmwiLCJhIjoiY2swNmNoY29kMDA2ZzNjbWN4MmRvbHlmYiJ9.HJHfadzLE1cNqce2G51BEQ';
@@ -144,7 +154,7 @@ map.on('load', function() {
     var description = e.features[0].properties.author_name;
 
     setSidebarTitle("1 result");
-    addAuthorResult(e.features[0].properties.author_name, e.features[0].properties.city_birth, e.features[0].properties.work_1);
+    setAuthorResult(e.features[0].properties.author_name, e.features[0].properties.city_birth, e.features[0].properties.work_1);
 
     // Ensure that if the map is zoomed out such that multiple copies of the feature are visible, the popup appears over the copy being pointed to.
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
