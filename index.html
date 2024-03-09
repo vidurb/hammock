@@ -65,12 +65,12 @@ function clearSidebar(){
   sidebar.innerHTML = "";
 }
 
-function addAuthorResult(name, city_birth, work1) {
-  sidebar.innerHTML += '<div class="sidebar-author"><h3>' + name + '</br><span class="color-mid-green">' + city_birth + '</span></h3><p class="text-label padtop">Author of</p><p>'+ work1 +'</p><p>Book 2</p></div>';
+function addAuthorResult(name, city_birth, work1, work2) {
+  sidebar.innerHTML += '<div class="sidebar-author"><h3>' + name + '</br><span class="color-mid-green">' + city_birth + '</span></h3><p class="text-label padtop">Author of</p><p>'+ work1 +'</p><p>' + work2 +'</p></div>';
 }
 
-function setAuthorResult(name, city_birth, work1) {
-  sidebar.innerHTML = '<div class="sidebar-author"><h3>' + name + '</br><span class="color-mid-green">' + city_birth + '</span></h3><p class="text-label padtop">Author of</p><p>'+ work1 +'</p><p>Book 2</p></div>';
+function setAuthorResult(name, city_birth, work1, work2) {
+  sidebar.innerHTML = '<div class="sidebar-author"><h3>' + name + '</br><span class="color-mid-green">' + city_birth + '</span></h3><p class="text-label padtop">Author of</p><p>'+ work1 +'</p><p>' + work2 +'</p></div>';
 
 }
 
@@ -114,11 +114,11 @@ map.on('load', function() {
       'circle-radius': [
         'step',
         ['get', 'point_count'],
+        15,
+        4,
         20,
-        3,
-        30,
-        5,
-        40
+        7,
+        25
       ]
     }
   });
@@ -154,7 +154,7 @@ map.on('load', function() {
     var description = e.features[0].properties.author_name;
 
     setSidebarTitle("1 result");
-    setAuthorResult(e.features[0].properties.author_name, e.features[0].properties.city_birth, e.features[0].properties.work_1);
+    setAuthorResult(e.features[0].properties.author_name, e.features[0].properties.city_birth, e.features[0].properties.work_1, e.features[0].properties.work_2);
 
     // Ensure that if the map is zoomed out such that multiple copies of the feature are visible, the popup appears over the copy being pointed to.
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
@@ -175,7 +175,7 @@ map.on('load', function() {
     clearSidebar();
     setSidebarTitle(leaves.length + " results");
     leaves.forEach(function(leaf) {
-      addAuthorResult(leaf.properties.author_name, leaf.properties.city_birth, leaf.properties.work_1);
+      addAuthorResult(leaf.properties.author_name, leaf.properties.city_birth, leaf.properties.work_1, leaf.properties.work_2);
     });
   });
 });

@@ -136,7 +136,7 @@ line-height: 1.4;
     width: 360px;
     right: 20px;
     top: 30px;
-    /* bottom: 20px; */
+    bottom: 20px;
     background-color: var(--color-foreground);
     margin-top: 80px;
     border-radius: 16px;
