@@ -1,3 +1,5 @@
+# todo replace any instances of ' in the csv file with ending quote
+
 import csv
 import json
 from opencage.geocoder import OpenCageGeocode
@@ -45,5 +47,5 @@ geojson = {
 }
 
 # Save the GeoJSON to a file
-with open('authors_geojson.json', 'w', encoding='utf-8') as jsonfile:
+with open('data.json', 'w', encoding='utf-8') as jsonfile:
     json.dump(geojson, jsonfile, ensure_ascii=False, indent=2)

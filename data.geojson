@@ -450,8 +450,8 @@
         "country": "France",
         "year_birth": 1940,
         "year_death": null,
-        "work_1": "A Man's Place",
-        "work_2": "A Woman's Story"
+        "work_1": "A Man’s Place",
+        "work_2": "A Woman’s Story"
       },
       "geometry": {
         "type": "Point",
@@ -491,7 +491,7 @@
         "year_birth": 1871,
         "year_death": 1922,
         "work_1": "In Search of Lost Time",
-        "work_2": "Swann's Way"
+        "work_2": "Swann’s Way"
       },
       "geometry": {
         "type": "Point",
@@ -550,7 +550,7 @@
         "country": "France",
         "year_birth": 1936,
         "year_death": 1982,
-        "work_1": "Life: A User's Manual",
+        "work_1": "Life: A User’s Manual",
         "work_2": "A Void"
       },
       "geometry": {
@@ -891,7 +891,7 @@
         "year_birth": 1964,
         "year_death": 2020,
         "work_1": "The Shadow of the Wind",
-        "work_2": "The Angel's Game"
+        "work_2": "The Angel’s Game"
       },
       "geometry": {
         "type": "Point",
@@ -1131,7 +1131,7 @@
         "year_birth": 1900,
         "year_death": 1976,
         "work_1": "The Days of His Grace",
-        "work_2": "The Commander's Daughter"
+        "work_2": "The Commander’s Daughter"
       },
       "geometry": {
         "type": "Point",
@@ -1251,7 +1251,7 @@
         "year_birth": 1805,
         "year_death": 1875,
         "work_1": "The Little Mermaid",
-        "work_2": "The Emperor's New Clothes"
+        "work_2": "The Emperor’s New Clothes"
       },
       "geometry": {
         "type": "Point",
@@ -1310,7 +1310,7 @@
         "country": "Denmark",
         "year_birth": 1957,
         "year_death": null,
-        "work_1": "Miss Smilla's Feeling for Snow",
+        "work_1": "Miss Smilla’s Feeling for Snow",
         "work_2": "Borderliners"
       },
       "geometry": {
@@ -1410,7 +1410,7 @@
         "country": "Norway",
         "year_birth": 1828,
         "year_death": 1906,
-        "work_1": "A Doll's House",
+        "work_1": "A Doll’s House",
         "work_2": "Hedda Gabler"
       },
       "geometry": {
@@ -1670,7 +1670,7 @@
         "country": "Italy",
         "year_birth": 1923,
         "year_death": 1985,
-        "work_1": "If on a winter's night a traveler",
+        "work_1": "If on a winter’s night a traveler",
         "work_2": "Invisible Cities"
       },
       "geometry": {
@@ -1691,7 +1691,7 @@
         "year_birth": 1932,
         "year_death": 2016,
         "work_1": "The Name of the Rose",
-        "work_2": "Foucault's Pendulum"
+        "work_2": "Foucault’s Pendulum"
       },
       "geometry": {
         "type": "Point",
@@ -1830,7 +1830,7 @@
         "country": "Austria",
         "year_birth": 1942,
         "year_death": null,
-        "work_1": "The Goalie's Anxiety at the Penalty Kick",
+        "work_1": "The Goalie’s Anxiety at the Penalty Kick",
         "work_2": "Short Letter, Long Farewell"
       },
       "geometry": {
@@ -2311,7 +2311,7 @@
         "year_birth": 1940,
         "year_death": null,
         "work_1": "Soul Mountain",
-        "work_2": "One Man's Bible"
+        "work_2": "One Man’s Bible"
       },
       "geometry": {
         "type": "Point",
@@ -2390,7 +2390,7 @@
         "country": "China",
         "year_birth": 1958,
         "year_death": null,
-        "work_1": "Lenin's Kisses",
+        "work_1": "Lenin’s Kisses",
         "work_2": "Serve the People!"
       },
       "geometry": {
@@ -2630,7 +2630,7 @@
         "country": "India",
         "year_birth": 1947,
         "year_death": null,
-        "work_1": "Midnight's Children",
+        "work_1": "Midnight’s Children",
         "work_2": "The Satanic Verses"
       },
       "geometry": {
@@ -2990,7 +2990,7 @@
         "country": "India",
         "year_birth": 1977,
         "year_death": null,
-        "work_1": "Beautiful Thing: Inside the Secret World of Bombay's Dance Bars",
+        "work_1": "Beautiful Thing: Inside the Secret World of Bombay’s Dance Bars",
         "work_2": "13 Men"
       },
       "geometry": {
@@ -3991,7 +3991,7 @@
         "year_birth": 1922,
         "year_death": 2007,
         "work_1": "Slaughterhouse-Five",
-        "work_2": "Cat's Cradle"
+        "work_2": "Cat’s Cradle"
       },
       "geometry": {
         "type": "Point",
@@ -4071,7 +4071,7 @@
         "year_birth": 1924,
         "year_death": 1987,
         "work_1": "Go Tell It on the Mountain",
-        "work_2": "Giovanni's Room"
+        "work_2": "Giovanni’s Room"
       },
       "geometry": {
         "type": "Point",
@@ -4171,7 +4171,7 @@
         "year_birth": 1933,
         "year_death": 2018,
         "work_1": "American Pastoral",
-        "work_2": "Portnoy's Complaint"
+        "work_2": "Portnoy’s Complaint"
       },
       "geometry": {
         "type": "Point",
@@ -4510,7 +4510,7 @@
         "country": "USA",
         "year_birth": 1909,
         "year_death": 2001,
-        "work_1": "The Optimist's Daughter",
+        "work_1": "The Optimist’s Daughter",
         "work_2": "The Robber Bridegroom"
       },
       "geometry": {
@@ -4571,7 +4571,7 @@
         "year_birth": 1923,
         "year_death": 2007,
         "work_1": "The Naked and the Dead",
-        "work_2": "The Executioner's Song"
+        "work_2": "The Executioner’s Song"
       },
       "geometry": {
         "type": "Point",
@@ -4671,7 +4671,7 @@
         "year_birth": 1928,
         "year_death": 2017,
         "work_1": "Zen and the Art of Motorcycle Maintenance",
-        "work_2": "Lila's Child"
+        "work_2": "Lila’s Child"
       },
       "geometry": {
         "type": "Point",
@@ -4831,7 +4831,7 @@
         "year_birth": 1963,
         "year_death": null,
         "work_1": "The Amazing Adventures of Kavalier & Clay",
-        "work_2": "The Yiddish Policemen's Union"
+        "work_2": "The Yiddish Policemen’s Union"
       },
       "geometry": {
         "type": "Point",
@@ -4970,7 +4970,7 @@
         "country": "USA",
         "year_birth": 1967,
         "year_death": null,
-        "work_1": "The Orphan Master's Son",
+        "work_1": "The Orphan Master’s Son",
         "work_2": "Fortune Smiles"
       },
       "geometry": {
@@ -5430,8 +5430,8 @@
         "country": "South Africa",
         "year_birth": 1923,
         "year_death": 2014,
-        "work_1": "July's People",
-        "work_2": "Burger's Daughter"
+        "work_1": "July’s People",
+        "work_2": "Burger’s Daughter"
       },
       "geometry": {
         "type": "Point",
@@ -5630,7 +5630,7 @@
         "country": "Nigeria",
         "year_birth": 1934,
         "year_death": null,
-        "work_1": "Death and the King's Horseman",
+        "work_1": "Death and the King’s Horseman",
         "work_2": "Ake: The Years of Childhood"
       },
       "geometry": {
@@ -5850,7 +5850,7 @@
         "country": "Ethiopia",
         "year_birth": 1971,
         "year_death": null,
-        "work_1": "Beneath the Lion's Gaze",
+        "work_1": "Beneath the Lion’s Gaze",
         "work_2": "The Shadow King"
       },
       "geometry": {
@@ -5890,7 +5890,7 @@
         "country": "Ethiopia",
         "year_birth": 1958,
         "year_death": null,
-        "work_1": "Notes from the Hyena's Belly",
+        "work_1": "Notes from the Hyena’s Belly",
         "work_2": "The God Who Begat a Jackal"
       },
       "geometry": {
@@ -6150,7 +6150,7 @@
         "country": "Morocco",
         "year_birth": 1968,
         "year_death": null,
-        "work_1": "The Moor's Account",
+        "work_1": "The Moor’s Account",
         "work_2": "The Other Americans"
       },
       "geometry": {
@@ -7670,7 +7670,7 @@
         "country": "Argentina",
         "year_birth": 1938,
         "year_death": null,
-        "work_1": "The Lizard's Tail",
+        "work_1": "The Lizard’s Tail",
         "work_2": "He Who Searches"
       },
       "geometry": {
