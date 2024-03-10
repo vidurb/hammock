@@ -25,8 +25,8 @@
   <header class="glass">
     <div class="header-links">
       <img class="logo" src="hammock-white.svg">
-      <div class="header-link">Geo</div>
-      <div class="header-link">Time</div>
+      <div class="header-link">Continent</div>
+      <div class="header-link">Century</div>
       <div class="header-link">Gender</div>
       <div class="header-link">Tags</div>
       <div class="header-link">Awards</div>
@@ -82,9 +82,6 @@
 
     // Appends author result to sidebar
     function addAuthorResult(name, city_birth, city_residence, country, year_birth, year_death, work1, work2, lat, long) {
-
-      showSidebar();
-
       var authorDetails = `
             <div onclick="setAuthorDetails('${name}', '${city_birth}', '${city_residence}', '${country}', ${year_birth}, ${year_death}, '${work1}', '${work2}', ${lat}, ${long})" class="sidebar-author">
             <h3>${name}<br><span class="color-mid-green">${city_birth}</span></h3>
@@ -97,11 +94,12 @@
 
     //shows full author details in sidebar
     function setAuthorDetails(name, city_birth, city_residence, country, year_birth, year_death, work1, work2, lat, long) {
-
+      flyTo(long, lat, 7);
       showAuthorDetails();
 
       title.innerHTML = title.innerHTML + " · " + name;
       sidebarauthordetails.innerHTML = `
+            <h3>${name}</h3>
             <p class="text-label padtop">Author of</p>
             <p>${work1}</p>
             <p>${work2}</p>
@@ -124,7 +122,6 @@
             <p class="text-label padtop">Bio</p>
             <p class="bio">Author of the famous book ${work1} and ${work2}. Born in ${city_birth} in ${year_birth}${year_death ? ` and died in ${year_death}` : " and is still alive and kicking"}.</p>
               `;
-      flyTo(long, lat, 7);
     }
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiZ3lhbmwiLCJhIjoiY2swNmNoY29kMDA2ZzNjbWN4MmRvbHlmYiJ9.HJHfadzLE1cNqce2G51BEQ';
@@ -231,6 +228,7 @@
           coordinates[0],
           coordinates[1]
         );
+        showSidebar();
 
         // Ensure that if the map is zoomed out such that multiple copies of the feature are visible, the popup appears over the copy being pointed to.
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
@@ -265,20 +263,24 @@
             );
           });
         });
+        showSidebar();
       });
 
+      function searchAndShowResults() {
+        clearSidebar(); // Clear the sidebar before updating with new results
 
-      function searchAuthors() {
         const searchValue = document.getElementById('search-bar').value.toLowerCase();
-        const searchRegex = new RegExp(searchValue.replace(/[^a-zA-Z0-9]/g, ''), 'i'); // Create a case-insensitive regex, ignoring non-alphanumeric characters
-        const features = map.querySourceFeatures('authors');
+        const features = map.queryRenderedFeatures({ layers: ['unclustered-point', 'clusters'] });
         const filteredFeatures = features.filter(feature => {
-          const authorName = feature.properties.author_name;
-          return authorName && typeof authorName === 'string' && searchRegex.test(authorName.replace(/[^a-zA-Z0-9]/g, ''));
+          const authorName = feature.properties.author_name?.toLowerCase();
+          const work1 = feature.properties.work_1?.toLowerCase();
+          const work2 = feature.properties.work_2?.toLowerCase();
+          return (
+            (authorName && authorName.includes(searchValue)) ||
+            (work1 && work1.includes(searchValue)) ||
+            (work2 && work2.includes(searchValue))
+          );
         });
-
-        // Clear the sidebar
-        clearSidebar();
 
         // Update the sidebar with the search results
         setSidebarTitle(filteredFeatures.length + " results");
@@ -298,18 +300,14 @@
         });
       }
 
-      document.getElementById('search-bar').addEventListener('input', searchAuthors);
+      document.getElementById('search-bar').addEventListener('input', searchAndShowResults);
+      map.on('moveend', searchAndShowResults);
+      map.on('zoomend', searchAndShowResults);
 
-
-      // Add zoom and rotation controls to the map.
-      // map.addControl(new mapboxgl.NavigationControl());
     });
 
+    searchAndShowResults();
   </script>
-
-</body>
-
-</html>
 
 </body>
 
