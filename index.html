@@ -79,6 +79,12 @@
       sidebarauthordetails.style.display = "none";
     }
 
+    function backToTheResults() {
+      showSidebar();
+      map.flyTo({
+        zoom: 3
+      });
+    }
 
     // Appends author result to sidebar
     function addAuthorResult(name, city_birth, city_residence, country, year_birth, year_death, work1, work2, lat, long) {
@@ -109,7 +115,7 @@
       flyTo(long, lat, 7);
       showAuthorDetails();
 
-      title.innerHTML = title.innerHTML + " · " + name;
+      title.innerHTML = "<div onclick='backToTheResults()'>Back to Results</div>";
       sidebarauthordetails.innerHTML = `
         <h3>${name}</h3>
         <p class="text-label padtop">Author of</p>
@@ -128,12 +134,12 @@
         </div>
         <div class="pill-container">
           <span class="pill pill-country">${country}</span>
-          <span class="pill pill-sex">Male</span>
+          <span class="pill pill-sex">Female</span>
           <span class="pill pill-era">${getCentury(year_birth)}</span>
           ${year_death && getCentury(year_death) !== getCentury(year_birth) ? `<span class="pill pill-era">${getCentury(year_death)}</span>` : ''}
         </div>
         <p class="text-label padtop">Bio</p>
-        <p class="bio">Author of the famous book ${work1} and ${work2}. Born in ${city_birth} in ${year_birth}${year_death ? ` and died in ${year_death}` : " and is still alive and kicking"}.</p>
+        <p class="bio">Author of the famous book ${work1} and ${work2}. Born in ${city_birth} ${year_birth ? `in ${year_birth}` : "god knows when"}${year_death ? ` and died in ${year_death}` : " and is still alive and kicking"}.</p>
       `;
     }
 

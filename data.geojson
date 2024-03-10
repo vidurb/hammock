@@ -7680,6 +7680,27 @@
           -34.6037181
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "author_name": "Alina Gufran",
+        "city_birth": "New Delhi, India",
+        "city_residence": "Goa, India",
+        "country": "India",
+        "year_birth": 1992,
+        "year_death": null,
+        "work_1": "No Place to Call My Own",
+        "work_2": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.10249019999999,
+          28.7040592
+        ]
+      }
     }
+    
   ]
 }
