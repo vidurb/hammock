@@ -232,6 +232,8 @@ header {
     border-radius: 24px;
     font-size: 12px;
     margin-right: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
 }
 .pill-country{
     background-color: #CDFFEA;

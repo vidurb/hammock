@@ -92,6 +92,18 @@
       sidebar.innerHTML += authorDetails;
     }
 
+    function getCentury(year) {
+      const century = Math.ceil(year / 100);
+      return `${century}${getOrdinalSuffix(century)} Century`;
+    }
+
+    function getOrdinalSuffix(number) {
+      const suffixes = ["th", "st", "nd", "rd"];
+      const remainder = number % 100;
+      const suffix = suffixes[(remainder - 20) % 10] || suffixes[remainder] || suffixes[0];
+      return suffix;
+    }
+
     //shows full author details in sidebar
     function setAuthorDetails(name, city_birth, city_residence, country, year_birth, year_death, work1, work2, lat, long) {
       flyTo(long, lat, 7);
@@ -99,29 +111,30 @@
 
       title.innerHTML = title.innerHTML + " · " + name;
       sidebarauthordetails.innerHTML = `
-            <h3>${name}</h3>
-            <p class="text-label padtop">Author of</p>
-            <p>${work1}</p>
-            <p>${work2}</p>
+        <h3>${name}</h3>
+        <p class="text-label padtop">Author of</p>
+        <p>${work1}</p>
+        <p>${work2}</p>
 
-            <div class="flex-equal">
-              <div class="flex-1">
-              <p class="text-label padtop">Birthplace</p>
-              <span class="color-mid-green">${city_birth}</span>
-              </div>
-              <div class="flex-1">
-              <p class="text-label padtop">Residence</p>
-              <span class="color-mid-green">${city_residence}</span>
-              </div>
-            </div>
-            <div class="pill-container">
-              <span class="pill pill-country">${country}</span>
-              <span class="pill pill-sex">Male</span>
-              <span class="pill pill-era">${year_birth}</span>
-            </div>
-            <p class="text-label padtop">Bio</p>
-            <p class="bio">Author of the famous book ${work1} and ${work2}. Born in ${city_birth} in ${year_birth}${year_death ? ` and died in ${year_death}` : " and is still alive and kicking"}.</p>
-              `;
+        <div class="flex-equal">
+          <div class="flex-1">
+            <p class="text-label padtop">Birthplace</p>
+            <span class="color-mid-green">${city_birth}</span>
+          </div>
+          <div class="flex-1">
+            <p class="text-label padtop">Residence</p>
+            <span class="color-mid-green">${city_residence}</span>
+          </div>
+        </div>
+        <div class="pill-container">
+          <span class="pill pill-country">${country}</span>
+          <span class="pill pill-sex">Male</span>
+          <span class="pill pill-era">${getCentury(year_birth)}</span>
+          ${year_death && getCentury(year_death) !== getCentury(year_birth) ? `<span class="pill pill-era">${getCentury(year_death)}</span>` : ''}
+        </div>
+        <p class="text-label padtop">Bio</p>
+        <p class="bio">Author of the famous book ${work1} and ${work2}. Born in ${city_birth} in ${year_birth}${year_death ? ` and died in ${year_death}` : " and is still alive and kicking"}.</p>
+      `;
     }
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiZ3lhbmwiLCJhIjoiY2swNmNoY29kMDA2ZzNjbWN4MmRvbHlmYiJ9.HJHfadzLE1cNqce2G51BEQ';

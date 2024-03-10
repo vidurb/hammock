@@ -1,4 +1,4 @@
-# todo replace any instances of ' in the csv file with ending quote
+# todo replace any instances of 's or s' in the csv file with ending quote
 
 import csv
 import json
