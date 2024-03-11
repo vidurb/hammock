@@ -82,7 +82,7 @@
     function backToTheResults() {
       showSidebar();
       map.flyTo({
-        zoom: 3
+        zoom: 4
       });
     }
 
@@ -148,7 +148,7 @@
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/gyanl/cls90czva01au01pld9fc7b5x', // Style defined via mapbox editor
-      center: [78.0000, 28.0000], // Example coordinates, you might want to center the map differently
+      center: [78.0000, 28.0000], // Approximately India. @angad would be nice to have this automatically set to the user's location.
       zoom: 3
     });
 
@@ -159,7 +159,6 @@
         zoom: zoom
       });
     }
-
 
     map.on('load', function () {
       // Add a new source from our GeoJSON data and set the 'cluster' option to true.
@@ -285,6 +284,11 @@
         showSidebar();
       });
 
+
+      // @angad - how do I run this function as soon as the map loads?
+      // @angad - The search sometimes misses out on some results, and shows some results as duplicates how do I fix that?
+      // @angad - Also probably related but clustered results don't show up at all.
+
       function searchAndShowResults() {
         clearSidebar(); // Clear the sidebar before updating with new results
 
@@ -302,7 +306,9 @@
         });
 
         // Update the sidebar with the search results
-        setSidebarTitle(filteredFeatures.length + " results");
+        if (sidebarauthordetails.style.display === 'none') {
+          setSidebarTitle(filteredFeatures.length + " results");
+        }
         filteredFeatures.forEach(feature => {
           addAuthorResult(
             feature.properties.author_name,
@@ -322,10 +328,8 @@
       document.getElementById('search-bar').addEventListener('input', searchAndShowResults);
       map.on('moveend', searchAndShowResults);
       map.on('zoomend', searchAndShowResults);
-
     });
 
-    searchAndShowResults();
   </script>
 
 </body>

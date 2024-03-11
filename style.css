@@ -63,6 +63,38 @@
     }
 }
 
+.fade-in-left{
+    animation: fadeInLeft 0.5s ease-in-out;
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-in-right{
+    animation: fadeInRight 0.5s ease-in-out;
+}
+
+@keyframes fadeInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 h3 {
     font-weight: 400;
     font-size: 18px;
