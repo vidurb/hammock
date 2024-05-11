@@ -295,37 +295,50 @@
     // @angad - Also probably related but clustered results don't show up at all.
 
     function searchAndShowResults(e) {
-      const searchValue = e.target.value.toLowerCase();
-
-      e.preventDefault();
-
-      if (searchValue.length < 3 && searchValue.length > 0) {
-        return;
-      }
-
       clearSidebar(); // Clear the sidebar before updating with new results
-
-
-      const filteredFeatures = window.data.features.filter(f => f?.properties?.author_name?.toLowerCase().includes(searchValue) || f?.properties?.work_1?.toLowerCase().includes(searchValue) || f?.properties?.work_2?.toLowerCase().includes(searchValue));
-
-      // Update the sidebar with the search results
-      if (sidebarauthordetails.style.display === 'none') {
-        setSidebarTitle(filteredFeatures.length + " results");
+      if (e.type === 'input') {
+        e?.preventDefault();
+        const searchValue = e?.target?.value?.toLowerCase();
+        if (searchValue?.length ?? 0 > 2) {
+          const filteredFeatures = window.data.features.filter(f => f?.properties?.author_name?.toLowerCase().includes(searchValue) || f?.properties?.work_1?.toLowerCase().includes(searchValue) || f?.properties?.work_2?.toLowerCase().includes(searchValue));
+          // Update the sidebar with the search results
+          if (sidebarauthordetails.style.display === 'none') {
+            setSidebarTitle(filteredFeatures.length + " results");
+          }
+          filteredFeatures.forEach(feature => {
+            addAuthorResult(
+              feature.properties.author_name,
+              feature.properties.city_birth,
+              feature.properties.city_residence,
+              feature.properties.country,
+              feature.properties.year_birth,
+              feature.properties.year_death,
+              feature.properties.work_1,
+              feature.properties.work_2,
+              feature.geometry.coordinates[0],
+              feature.geometry.coordinates[1]
+            );
+          });
+        } else {
+          setSidebarTitle("Search for your favourite author");
+        }
+      } else {
+        const visibleFeatures = map.queryRenderedFeatures({layers: ['unclustered-point', 'clusters']});
+        visibleFeatures.forEach(feature => {
+          addAuthorResult(
+            feature.properties.author_name,
+            feature.properties.city_birth,
+            feature.properties.city_residence,
+            feature.properties.country,
+            feature.properties.year_birth,
+            feature.properties.year_death,
+            feature.properties.work_1,
+            feature.properties.work_2,
+            feature.geometry.coordinates[0],
+            feature.geometry.coordinates[1]
+          );
+        });
       }
-      filteredFeatures.forEach(feature => {
-        addAuthorResult(
-          feature.properties.author_name,
-          feature.properties.city_birth,
-          feature.properties.city_residence,
-          feature.properties.country,
-          feature.properties.year_birth,
-          feature.properties.year_death,
-          feature.properties.work_1,
-          feature.properties.work_2,
-          feature.geometry.coordinates[0],
-          feature.geometry.coordinates[1]
-        );
-      });
     }
 
     const throttledSearch = _.throttle(searchAndShowResults, 500);
