@@ -11,7 +11,7 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 
 function App() {
-  const mapRef = useRef<MapRef>();
+  const mapRef = useRef<MapRef>(null);
   const fuse = new Fuse<GeoJSON.Feature<GeoJSON.Geometry, Author>>(
     data.features as GeoJSON.Feature<GeoJSON.Geometry, Author>[],
     {
