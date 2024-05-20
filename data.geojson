@@ -764,26 +764,6 @@
     {
       "type": "Feature",
       "properties": {
-        "author_name": "Rainer Maria Rilke",
-        "city_birth": "Prague, Austria-Hungary (now Czech Republic)",
-        "city_residence": "Val-Mont, Switzerland",
-        "country": "Germany",
-        "year_birth": 1875,
-        "year_death": 1926,
-        "work_1": "Letters to a Young Poet",
-        "work_2": "Duino Elegies"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          null,
-          null
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "author_name": "Walter Benjamin",
         "city_birth": "Berlin, Germany",
         "city_residence": "Portbou, Spain",
@@ -816,8 +796,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          13.0,
-          51.0
+          13,
+          51
         ]
       }
     },
@@ -1096,8 +1076,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          20.0,
-          52.0
+          20,
+          52
         ]
       }
     },
@@ -1716,8 +1696,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          20.0,
-          47.0
+          20,
+          47
         ]
       }
     },
@@ -1941,106 +1921,7 @@
         ]
       }
     },
-    {
-      "type": "Feature",
-      "properties": {
-        "author_name": "Milan Kundera",
-        "city_birth": "Brno, Czechoslovakia (now Czech Republic)",
-        "city_residence": "Paris, France",
-        "country": "Czechia",
-        "year_birth": 1929,
-        "year_death": null,
-        "work_1": "The Unbearable Lightness of Being",
-        "work_2": "The Book of Laughter and Forgetting"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          null,
-          null
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "author_name": "Franz Kafka",
-        "city_birth": "Prague, Austria-Hungary (now Czech Republic)",
-        "city_residence": "Prague, Czechoslovakia (now Czech Republic)",
-        "country": "Czechia",
-        "year_birth": 1883,
-        "year_death": 1924,
-        "work_1": "The Trial",
-        "work_2": "The Metamorphosis"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          null,
-          null
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "author_name": "Bohumil Hrabal",
-        "city_birth": "Brno, Czechoslovakia (now Czech Republic)",
-        "city_residence": "Prague, Czechoslovakia (now Czech Republic)",
-        "country": "Czechia",
-        "year_birth": 1914,
-        "year_death": 1997,
-        "work_1": "Closely Watched Trains",
-        "work_2": "I Served the King of England"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          null,
-          null
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "author_name": "Josef Škvorecký",
-        "city_birth": "Náchod, Czechoslovakia (now Czech Republic)",
-        "city_residence": "Toronto, Canada",
-        "country": "Czechia",
-        "year_birth": 1924,
-        "year_death": 2012,
-        "work_1": "The Cowards",
-        "work_2": "The Engineer of Human Souls"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          null,
-          null
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "author_name": "Arnošt Lustig",
-        "city_birth": "Prague, Czechoslovakia (now Czech Republic)",
-        "city_residence": "Prague, Czech Republic",
-        "country": "Czechia",
-        "year_birth": 1926,
-        "year_death": 2011,
-        "work_1": "A Prayer for Katerina Horowitz",
-        "work_2": "Darkness Casts No Shadow"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          null,
-          null
-        ]
-      }
-    },
+
     {
       "type": "Feature",
       "properties": {
@@ -2536,8 +2417,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          79.0,
-          22.0
+          79,
+          22
         ]
       }
     },
@@ -2558,26 +2439,6 @@
         "coordinates": [
           80.9346001,
           26.8381
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "author_name": "Amrita Pritam",
-        "city_birth": "Gujranwala, British India (now Pakistan)",
-        "city_residence": "New Delhi, India",
-        "country": "India",
-        "year_birth": 1919,
-        "year_death": 2005,
-        "work_1": "Pinjar",
-        "work_2": "Raseedi Ticket"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          null,
-          null
         ]
       }
     },
@@ -2736,7 +2597,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          79.0,
+          79,
           27.166667
         ]
       }
@@ -3478,26 +3339,6 @@
         "coordinates": [
           100.2559077,
           5.4065013
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "author_name": "Bapsi Sidhwa",
-        "city_birth": "Karachi, British India (now Pakistan)",
-        "city_residence": "Lahore, Pakistan",
-        "country": "Pakistan",
-        "year_birth": 1938,
-        "year_death": null,
-        "work_1": "Ice-Candy-Man",
-        "work_2": "The Crow Eaters"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          null,
-          null
         ]
       }
     },
@@ -5724,26 +5565,6 @@
     {
       "type": "Feature",
       "properties": {
-        "author_name": "Uwem Akpan",
-        "city_birth": "Ikot Akpan Nsa",
-        "city_residence": "Lagos",
-        "country": "Nigeria",
-        "year_birth": 1971,
-        "year_death": null,
-        "work_1": "Say You're One of Them",
-        "work_2": "-"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          null,
-          null
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "author_name": "Teju Cole",
         "city_birth": "Kalamazoo",
         "city_residence": "New York City",
@@ -5961,26 +5782,7 @@
         ]
       }
     },
-    {
-      "type": "Feature",
-      "properties": {
-        "author_name": "Ngũgĩ wa Thiong'o",
-        "city_birth": "Kamiriithu",
-        "city_residence": "Irvine",
-        "country": "Kenya",
-        "year_birth": 1938,
-        "year_death": null,
-        "work_1": "Devil on the Cross",
-        "work_2": "Petals of Blood"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          null,
-          null
-        ]
-      }
-    },
+
     {
       "type": "Feature",
       "properties": {
@@ -6364,26 +6166,6 @@
     {
       "type": "Feature",
       "properties": {
-        "author_name": "Ama Ata Aidoo",
-        "city_birth": "Abeadzi Kyiakor",
-        "city_residence": "Accra",
-        "country": "Ghana",
-        "year_birth": 1942,
-        "year_death": null,
-        "work_1": "Our Sister Killjoy",
-        "work_2": "Changes: A Love Story"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          null,
-          null
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "author_name": "José Eduardo Agualusa",
         "city_birth": "Huambo",
         "city_residence": "Lisbon",
@@ -6418,26 +6200,6 @@
         "coordinates": [
           14.0356608,
           -12.9104657
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "author_name": "Gaŭz",
-        "city_birth": "-",
-        "city_residence": "Minsk",
-        "country": "Ivory Coast",
-        "year_birth": 1974,
-        "year_death": null,
-        "work_1": "Захар Беркут",
-        "work_2": "Місяць у Гаю"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          null,
-          null
         ]
       }
     },
@@ -6977,7 +6739,7 @@
         "type": "Point",
         "coordinates": [
           -72.25,
-          -16.0
+          -16
         ]
       }
     },
@@ -7701,6 +7463,5 @@
         ]
       }
     }
-    
   ]
 }
