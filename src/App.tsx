@@ -207,7 +207,11 @@ function App() {
                 />
               ))}
           </div>
-          <div id="sidebar-author-details" className="sidebar-author-details">
+          <div
+            id="sidebar-author-details"
+            className="sidebar-author-details"
+            style={{ display: activeAuthor === null ? "none" : "block" }}
+          >
             {activeAuthor && <AuthorDetails author={activeAuthor} />}
           </div>
         </Sidebar>
