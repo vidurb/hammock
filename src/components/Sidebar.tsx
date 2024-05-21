@@ -27,6 +27,7 @@ export default function Sidebar({
             width="16px"
             src={chevronUpIcon}
             alt="Toggle Sidebar"
+            style={{ transform: active ? "rotate(180deg)" : "rotate(0deg)" }}
           />
         </button>
       </div>
